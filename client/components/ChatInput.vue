@@ -23,7 +23,7 @@
 				id="upload"
 				type="button"
 				aria-label="Upload file"
-				:disabled="!this.$root.isConnected"
+				:disabled="!$store.state.isConnected"
 			/>
 		</span>
 		<span
@@ -35,7 +35,7 @@
 				id="submit"
 				type="submit"
 				aria-label="Send message"
-				:disabled="!this.$root.isConnected"
+				:disabled="!$store.state.isConnected"
 			/>
 		</span>
 	</form>
@@ -180,7 +180,7 @@ export default {
 			this.$refs.input.click();
 			this.$refs.input.focus();
 
-			if (!this.$root.isConnected) {
+			if (!$store.state.isConnected) {
 				return false;
 			}
 

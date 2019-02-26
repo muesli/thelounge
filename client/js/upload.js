@@ -93,7 +93,7 @@ class Uploader {
 			return;
 		}
 
-		if (!this.vueApp.isConnected) {
+		if (!this.vueApp.$store.state.isConnected) {
 			this.handleResponse({
 				error: `You are currently disconnected, unable to initiate upload process.`,
 			});
@@ -181,9 +181,7 @@ class Uploader {
 		this.setProgress(0);
 
 		if (response.error) {
-			// require here due to circular dependency
-			const {vueApp} = require("./vue");
-			vueApp.currentUserVisibleError = response.error;
+			this.vueApp.currentUserVisibleError = response.error;
 			return;
 		}
 
