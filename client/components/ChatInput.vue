@@ -180,7 +180,7 @@ export default {
 			this.$refs.input.click();
 			this.$refs.input.focus();
 
-			if (!$store.state.isConnected) {
+			if (!this.$store.state.isConnected) {
 				return false;
 			}
 
