@@ -421,6 +421,7 @@ function initializeClient(socket, client, token, lastMessage, openChannel) {
 				if (typeof p1 === "undefined" || p1 === "" || p1 !== p2) {
 					socket.emit("change-password", {
 						error: "",
+						success: false,
 					});
 					return;
 				}
@@ -431,6 +432,7 @@ function initializeClient(socket, client, token, lastMessage, openChannel) {
 						if (!matching) {
 							socket.emit("change-password", {
 								error: "password_incorrect",
+								success: false,
 							});
 							return;
 						}
@@ -438,7 +440,7 @@ function initializeClient(socket, client, token, lastMessage, openChannel) {
 						const hash = Helper.password.hash(p1);
 
 						client.setPassword(hash, (success) => {
-							const obj = {};
+							const obj = {success: false};
 
 							if (success) {
 								obj.success = true;
