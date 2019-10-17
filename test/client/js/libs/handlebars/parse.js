@@ -30,7 +30,7 @@ describe("parse Handlebars helper", () => {
 			{
 				input: '#&">bug',
 				expected:
-					'<span role="button" tabindex="0" data-chan="#&amp;&quot;&gt;bug" class="inline-channel">#&amp;&quot;&gt;bug</span>',
+					'<span role="button" tabindex="0" class="inline-channel">#&amp;&quot;&gt;bug</span>',
 			},
 		];
 
@@ -184,29 +184,25 @@ describe("parse Handlebars helper", () => {
 			{
 				input: "#a",
 				expected:
-					'<span role="button" tabindex="0" data-chan="#a" class="inline-channel">' +
-					"#a" +
-					"</span>",
+					'<span role="button" tabindex="0" class="inline-channel">' + "#a" + "</span>",
 			},
 			{
 				input: "#test",
 				expected:
-					'<span role="button" tabindex="0" data-chan="#test" class="inline-channel">' +
+					'<span role="button" tabindex="0" class="inline-channel">' +
 					"#test" +
 					"</span>",
 			},
 			{
 				input: "#äöü",
 				expected:
-					'<span role="button" tabindex="0" data-chan="#äöü" class="inline-channel">' +
-					"#äöü" +
-					"</span>",
+					'<span role="button" tabindex="0" class="inline-channel">' + "#äöü" + "</span>",
 			},
 			{
 				input: "inline #channel text",
 				expected:
 					"inline " +
-					'<span role="button" tabindex="0" data-chan="#channel" class="inline-channel">' +
+					'<span role="button" tabindex="0" class="inline-channel">' +
 					"#channel" +
 					"</span>" +
 					" text",
@@ -214,7 +210,7 @@ describe("parse Handlebars helper", () => {
 			{
 				input: "#1,000",
 				expected:
-					'<span role="button" tabindex="0" data-chan="#1,000" class="inline-channel">' +
+					'<span role="button" tabindex="0" class="inline-channel">' +
 					"#1,000" +
 					"</span>",
 			},
@@ -222,7 +218,7 @@ describe("parse Handlebars helper", () => {
 				input: "@#a",
 				expected:
 					"@" +
-					'<span role="button" tabindex="0" data-chan="#a" class="inline-channel">' +
+					'<span role="button" tabindex="0" class="inline-channel">' +
 					"#a" +
 					"</span>",
 			},
@@ -378,7 +374,7 @@ describe("parse Handlebars helper", () => {
 				users: ["MaxLeiter, test"],
 				input: "#test-channelMaxLeiter",
 				expected:
-					'<span role="button" tabindex="0" data-chan="#test-channelMaxLeiter" class="inline-channel">' +
+					'<span role="button" tabindex="0" class="inline-channel">' +
 					"#test-channelMaxLeiter" +
 					"</span>",
 			},
@@ -414,7 +410,7 @@ describe("parse Handlebars helper", () => {
 			{
 				input: "\x02#\x038,9thelounge",
 				expected:
-					'<span role="button" tabindex="0" data-chan="#thelounge" class="inline-channel">' +
+					'<span role="button" tabindex="0" class="inline-channel">' +
 					'<span class="irc-bold">#</span>' +
 					'<span class="irc-bold irc-fg8 irc-bg9">thelounge</span>' +
 					"</span>",
@@ -477,7 +473,7 @@ describe("parse Handlebars helper", () => {
 			input: "#i❤️thelounge",
 			// FIXME: Emoji in text should be `<span class="emoji">❤️</span>`. See https://github.com/thelounge/thelounge/issues/1784
 			expected:
-				'<span role="button" tabindex="0" data-chan="#i❤️thelounge" class="inline-channel">#i❤️thelounge</span>',
+				'<span role="button" tabindex="0" class="inline-channel">#i❤️thelounge</span>',
 		},
 	].forEach((item) => {
 		// TODO: In Node v6+, use `{name, input, expected}`
@@ -493,7 +489,7 @@ describe("parse Handlebars helper", () => {
 					'test \x0312#\x0312\x0312"te\x0312st\x0312\x0312\x0312\x0312\x0312\x0312\x0312\x0312\x0312\x0312\x0312a',
 				expected:
 					"test " +
-					'<span role="button" tabindex="0" data-chan="#&quot;testa" class="inline-channel">' +
+					'<span role="button" tabindex="0" class="inline-channel">' +
 					'<span class="irc-fg12">#&quot;testa</span>' +
 					"</span>",
 			},
@@ -554,7 +550,7 @@ describe("parse Handlebars helper", () => {
 
 		expect(actual).to.equal(
 			'Url: <a href="http://example.com/path" target="_blank" rel="noopener">http://example.com/path</a> ' +
-				'Channel: <span role="button" tabindex="0" data-chan="##channel" class="inline-channel">##channel</span>'
+				'Channel: <span role="button" tabindex="0" class="inline-channel">##channel</span>'
 		);
 	});
 
@@ -563,7 +559,7 @@ describe("parse Handlebars helper", () => {
 		const actual = getParsedMessageContents(input);
 
 		expect(actual).to.equal(
-			'<span role="button" tabindex="0" data-chan="#test-https://example.com" class="inline-channel">' +
+			'<span role="button" tabindex="0" class="inline-channel">' +
 				"#test-https://example.com" +
 				"</span>"
 		);
