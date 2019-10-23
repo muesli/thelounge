@@ -16,8 +16,7 @@ export default {
 			);
 
 			if (existingChannel) {
-				const $ = require("jquery");
-				$(`#sidebar .chan[data-id="${existingChannel.id}"]`).trigger("click");
+				this.$router.push("chan-" + existingChannel.id);
 			}
 
 			// TODO: Required here because it breaks tests
