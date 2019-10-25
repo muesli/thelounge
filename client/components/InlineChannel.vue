@@ -16,7 +16,7 @@ export default {
 			);
 
 			if (existingChannel) {
-				this.$router.push("chan-" + existingChannel.id);
+				this.$root.switchToChannel(existingChannel);
 			}
 
 			// TODO: Required here because it breaks tests
